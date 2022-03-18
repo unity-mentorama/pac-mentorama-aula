@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 4959690762535076490}
   - component: {fileID: 4959690762535076489}
   - component: {fileID: 4975438810954545156}
+  - component: {fileID: 2178685947610961301}
+  - component: {fileID: 26750817726114863}
+  - component: {fileID: 7150957938357157780}
   m_Layer: 9
   m_Name: BaseGhost
   m_TagString: Blinky
@@ -80,6 +83,43 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2178685947610961301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4959690762535076493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7fb123a3048bc041a68e7cf4c3c59e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &26750817726114863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4959690762535076493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94ba2002b98ac7e438befeda53e97375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveSpeed: 4
+--- !u!114 &7150957938357157780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4959690762535076493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d452dcdb7ac5f014e984039c7a544f67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4959690762931578614
 GameObject:
   m_ObjectHideFlags: 0
