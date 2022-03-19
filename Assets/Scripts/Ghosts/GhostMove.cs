@@ -10,12 +10,14 @@ public class GhostMove : MonoBehaviour
 
 	public event Action OnUpdateMoveTarget;
 
+	public CharacterMotor CharacterMotor { get => _motor; }
+
 	public void SetTargetMoveLocation(Vector2 targetMoveLocation)
 	{
 		_targetMoveLocation = targetMoveLocation;
 	}
 
-	private void Start()
+	private void Awake()
 	{
 		_motor = GetComponent<CharacterMotor>();
 		_motor.OnAlignedWithGrid += CharacterMotor_OnAlignedWithGrid;

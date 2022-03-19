@@ -89,5 +89,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Energizer
       objectReference: {fileID: 0}
+    - target: {fileID: 2393694300349605247, guid: 6a8d69e2d8d76884e96b2814234122ab,
+        type: 3}
+      propertyPath: Score
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2393694300349605247, guid: 6a8d69e2d8d76884e96b2814234122ab,
+        type: 3}
+      propertyPath: IsVictoryCondition
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a8d69e2d8d76884e96b2814234122ab, type: 3}
