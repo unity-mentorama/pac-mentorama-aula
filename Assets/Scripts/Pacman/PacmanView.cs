@@ -45,8 +45,6 @@ public class PacmanView : MonoBehaviour
 
 	private void CharacterMotor_OnDirectionChanged(Direction direction)
 	{
-		Animator.speed = 1;
-
 		switch (direction)
 		{
 			case Direction.None:

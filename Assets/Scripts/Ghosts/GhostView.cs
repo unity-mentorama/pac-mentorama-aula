@@ -22,6 +22,12 @@ public class GhostView : MonoBehaviour
 	{
 		Animator.SetInteger("GhostType", (int)GhostType);
 		CharacterMotor.OnDirectionChanged += CharacterMotor_OnDirectionChanged;
+		GhostAI.OnGhostStateChanged += GhostAI_OnGhostStateChanged;
+	}
+
+	private void GhostAI_OnGhostStateChanged(GhostState ghostState)
+	{
+		Animator.SetInteger("State", (int)ghostState);
 	}
 
 	private void CharacterMotor_OnDirectionChanged(Direction direction)
