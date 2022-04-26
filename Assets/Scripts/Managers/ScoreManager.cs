@@ -7,12 +7,21 @@ public class ScoreManager : MonoBehaviour
 
 	private int _highScore;
 
+	private int _currentGhostCaughtsCount;
+	private GhostScoreData _ghostScoreData;
+
 	public int CurrentScore { get => _currentScore; }
 
 	public int HighScore { get => _highScore; }
 
 	public event Action<int> OnScoreChanged;
 	public event Action<int> OnHighScoreChanged;
+
+	public void EnergizerActivated(GhostScoreData ghostScoreData)
+	{
+		_ghostScoreData = ghostScoreData;
+		_currentGhostCaughtsCount = 0;
+	}
 
 	private void Awake()
 	{
@@ -26,9 +35,31 @@ public class ScoreManager : MonoBehaviour
 		{
 			collectible.OnCollected += Collectible_OnCollected;
 		}
+
+		var allGhosts = FindObjectsOfType<GhostAI>();
+		foreach (var ghost in allGhosts)
+		{
+			ghost.OnGhostCaught += GhostAI_OnGhostCaught;
+		}
+	}
+
+	private void GhostAI_OnGhostCaught(GhostAI ghost)
+	{
+		int score = _ghostScoreData.GhostScore + _ghostScoreData.GhostScoreIncrement * _currentGhostCaughtsCount;
+
+		AddScore(score);
+
+		_currentGhostCaughtsCount++;
 	}
 
 	private void Collectible_OnCollected(int score, Collectible collectible)
+	{
+		AddScore(score);
+
+		collectible.OnCollected -= Collectible_OnCollected;
+	}
+
+	private void AddScore(int score)
 	{
 		_currentScore += score;
 		OnScoreChanged?.Invoke(_currentScore);
@@ -38,8 +69,6 @@ public class ScoreManager : MonoBehaviour
 			_highScore = _currentScore;
 			OnHighScoreChanged?.Invoke(_highScore);
 		}
-
-		collectible.OnCollected -= Collectible_OnCollected;
 	}
 
 	private void OnDestroy()

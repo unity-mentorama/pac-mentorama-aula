@@ -25,6 +25,7 @@ public class GhostAI : MonoBehaviour
 	private bool _leaveHouse;
 
 	public event Action<GhostState> OnGhostStateChanged;
+	public event Action<GhostAI> OnGhostCaught;
 
 	public void Reset()
 	{
@@ -136,7 +137,6 @@ public class GhostAI : MonoBehaviour
 					_ghostState = GhostState.Active;
 					OnGhostStateChanged?.Invoke(_ghostState);
 				}
-
 				break;
 		}
 	}
@@ -159,6 +159,7 @@ public class GhostAI : MonoBehaviour
 					_ghostMove.CharacterMotor.CollideWithGates(false);
 					_ghostState = GhostState.Defeated;
 					OnGhostStateChanged?.Invoke(_ghostState);
+					OnGhostCaught?.Invoke(this);
 				}
 				break;
 		}

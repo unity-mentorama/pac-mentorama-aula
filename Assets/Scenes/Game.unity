@@ -841,6 +841,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartupTime: 4
   LifeLostTimer: 3
+  GhostScoreTimer: 2
 --- !u!4 &2006551755
 Transform:
   m_ObjectHideFlags: 0
@@ -874,6 +875,23 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 381084729, guid: ec7abb1ac6ef8af4899fe1e11593106c, type: 3}
+      propertyPath: PauseTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 381084729, guid: ec7abb1ac6ef8af4899fe1e11593106c, type: 3}
+      propertyPath: AudioSource
+      value: 
+      objectReference: {fileID: 519420030}
+    - target: {fileID: 381084729, guid: ec7abb1ac6ef8af4899fe1e11593106c, type: 3}
+      propertyPath: ScorePrefab
+      value: 
+      objectReference: {fileID: 385889752764453452, guid: 68e9074f55b467e47a41af6365c9b395,
+        type: 3}
+    - target: {fileID: 381084729, guid: ec7abb1ac6ef8af4899fe1e11593106c, type: 3}
+      propertyPath: GhostScoreSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 273d6a7eb4d47bc44bffe822b4d64d01, type: 3}
     - target: {fileID: 2019402816, guid: ec7abb1ac6ef8af4899fe1e11593106c, type: 3}
       propertyPath: AudioSource
       value: 

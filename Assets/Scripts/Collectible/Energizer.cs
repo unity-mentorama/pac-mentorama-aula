@@ -4,6 +4,8 @@ public class Energizer : MonoBehaviour
 {
 	public float Duration;
 
+	public GhostScoreData GhostScoreData;
+
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		var ghosts = FindObjectsOfType<GhostAI>();
@@ -12,5 +14,9 @@ public class Energizer : MonoBehaviour
 		{
 			ghost.SetVulnerable(Duration);
 		}
+
+		var scoreManager = FindObjectOfType<ScoreManager>();
+
+		scoreManager.EnergizerActivated(GhostScoreData);
 	}
 }
