@@ -46,6 +46,8 @@ public class GhostAI : MonoBehaviour
 
 	public void SetVulnerable(float duration)
 	{
+		if (_ghostState == GhostState.Defeated) return;
+
 		_vulnerabilityTimer = duration;
 		_ghostState = GhostState.Vulnerable;
 		OnGhostStateChanged?.Invoke(_ghostState);
