@@ -10,7 +10,7 @@ public enum GhostState
 }
 
 [RequireComponent(typeof(GhostMove))]
-public class GhostAI : MonoBehaviour
+public class GhostAI : MonoBehaviour, IMovableCharacter
 {
 	public float VulnerabilityEndingTime;
 
@@ -27,7 +27,7 @@ public class GhostAI : MonoBehaviour
 	public event Action<GhostState> OnGhostStateChanged;
 	public event Action<GhostAI> OnGhostCaught;
 
-	public void Reset()
+	public void ResetPosition()
 	{
 		_ghostMove.CharacterMotor.ResetPosition();
 		_ghostState = GhostState.Active;

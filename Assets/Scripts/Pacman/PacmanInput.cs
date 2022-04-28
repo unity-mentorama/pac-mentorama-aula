@@ -1,9 +1,24 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterMotor))]
-public class PacmanInput : MonoBehaviour
+public class PacmanInput : MonoBehaviour, IMovableCharacter
 {
 	private CharacterMotor _motor;
+
+	public void ResetPosition()
+	{
+		_motor.ResetPosition();
+	}
+
+	public void StartMoving()
+	{
+		_motor.enabled = true;
+	}
+
+	public void StopMoving()
+	{
+		_motor.enabled = false;
+	}
 
 	private void Start()
 	{

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,8 +18,8 @@ public class GameManager : MonoBehaviour
 
 	public float LifeLostTimer;
 
-	private GhostAI[] _allGhosts;
-	private CharacterMotor _pacmanMotor;
+	private List<IMovableCharacter> _allMovableCharacters;
+
 	private GhostHouse _ghostHouse;
 
 	private GameState _gameState;
@@ -42,9 +43,14 @@ public class GameManager : MonoBehaviour
 			collectible.OnCollected += Collectible_OnCollected;
 		}
 
+		_allMovableCharacters = new List<IMovableCharacter>();
+
 		var pacman = GameObject.FindWithTag("Player");
-		_pacmanMotor = pacman.GetComponent<CharacterMotor>();
-		_allGhosts = FindObjectsOfType<GhostAI>();
+		_allMovableCharacters.Add(pacman.GetComponent<PacmanInput>());
+
+		var allGhosts = FindObjectsOfType<GhostAI>();
+		_allMovableCharacters.AddRange(allGhosts);
+
 		StopAllCharacters();
 
 		_ghostHouse = FindObjectOfType<GhostHouse>();
@@ -79,7 +85,6 @@ public class GameManager : MonoBehaviour
 		collectible.OnCollected -= Collectible_OnCollected;
 	}
 
-	// Update is called once per frame
 	private void Update()
 	{
 		switch (_gameState)
@@ -110,7 +115,8 @@ public class GameManager : MonoBehaviour
 					}
 					else
 					{
-						ResetAllCharacters();
+						ResetAllCharactersPositions();
+						StartAllCharacters();
 						_gameState = GameState.Playing;
 					}
 				}
@@ -129,35 +135,27 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	private void ResetAllCharacters()
+	private void ResetAllCharactersPositions()
 	{
-		_pacmanMotor.ResetPosition();
-
-		foreach (var ghost in _allGhosts)
+		foreach (var character in _allMovableCharacters)
 		{
-			ghost.Reset();
+			character.ResetPosition();
 		}
-
-		StartAllCharacters();
 	}
 
 	private void StartAllCharacters()
 	{
-		_pacmanMotor.enabled = true;
-
-		foreach (var ghost in _allGhosts)
+		foreach (var character in _allMovableCharacters)
 		{
-			ghost.StartMoving();
+			character.StartMoving();
 		}
 	}
 
 	private void StopAllCharacters()
 	{
-		_pacmanMotor.enabled = false;
-
-		foreach (var ghost in _allGhosts)
+		foreach (var character in _allMovableCharacters)
 		{
-			ghost.StopMoving();
+			character.StopMoving();
 		}
 	}
 }
