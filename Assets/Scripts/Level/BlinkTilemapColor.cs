@@ -28,7 +28,7 @@ public class BlinkTilemapColor : MonoBehaviour
 		{
 			_tilemap.color = _isColor1 ? Color2 : Color1;
 			_isColor1 = !_isColor1;
-			_nextStateChange = Time.time + Interval;
+			_nextStateChange += Interval;
 		}
 	}
 }

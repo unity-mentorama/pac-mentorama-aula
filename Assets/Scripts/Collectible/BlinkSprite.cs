@@ -22,7 +22,7 @@ public class BlinkSprite : MonoBehaviour
 		if (Time.time > _nextStateChange)
 		{
 			_spriteRenderer.enabled = !_spriteRenderer.enabled;
-			_nextStateChange = Time.time + Interval;
+			_nextStateChange += Interval;
 		}
 	}
 }
