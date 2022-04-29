@@ -8,7 +8,7 @@ public enum GhostType
 	Clyde
 }
 
-public class GhostView : MonoBehaviour
+public class GhostView : BaseView
 {
 	public CharacterMotor CharacterMotor;
 
@@ -18,7 +18,7 @@ public class GhostView : MonoBehaviour
 
 	public GhostType GhostType;
 
-	public void Start()
+	private void Start()
 	{
 		Animator.SetInteger("GhostType", (int)GhostType);
 		CharacterMotor.OnDirectionChanged += CharacterMotor_OnDirectionChanged;

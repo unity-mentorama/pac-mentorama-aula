@@ -538,6 +538,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8785825786031533287, guid: ae327bd502d47fc41a21dddcb4307667,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8785825786688063641, guid: ae327bd502d47fc41a21dddcb4307667,
         type: 3}
       propertyPath: m_RootOrder
@@ -841,7 +846,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartupTime: 4
   LifeLostTimer: 3
-  GhostScoreTimer: 2
 --- !u!4 &2006551755
 Transform:
   m_ObjectHideFlags: 0
@@ -1379,6 +1383,11 @@ PrefabInstance:
       propertyPath: AudioSource
       value: 
       objectReference: {fileID: 519420030}
+    - target: {fileID: 7786777576644217940, guid: f126721da5c98d646b9793f201c46ada,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7786777578098180152, guid: f126721da5c98d646b9793f201c46ada,
         type: 3}
       propertyPath: m_Name

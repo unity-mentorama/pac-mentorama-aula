@@ -16,6 +16,7 @@ public class ScoreManager : MonoBehaviour
 
 	public event Action<int> OnScoreChanged;
 	public event Action<int> OnHighScoreChanged;
+	public event Action<int, GhostAI> OnShowGhostScore;
 
 	public void EnergizerActivated(GhostScoreData ghostScoreData)
 	{
@@ -50,6 +51,8 @@ public class ScoreManager : MonoBehaviour
 		AddScore(score);
 
 		_currentGhostCaughtsCount++;
+
+		OnShowGhostScore?.Invoke(score, ghost);
 	}
 
 	private void Collectible_OnCollected(int score, Collectible collectible)

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PacmanView : MonoBehaviour
+public class PacmanView : BaseView
 {
 	public CharacterMotor CharacterMotor;
 
