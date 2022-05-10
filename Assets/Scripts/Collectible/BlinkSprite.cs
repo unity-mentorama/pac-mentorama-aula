@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -5,24 +6,19 @@ public class BlinkSprite : MonoBehaviour
 {
 	public float Interval;
 
-	private SpriteRenderer _spriteRenderer;
-
-	private float _nextStateChange;
-
-	private void Start()
+	// Se mudar o tipo de retorno do Start de void para IEnumerator
+	// ele é automaticamente chamado como uma Courotine!
+	private IEnumerator Start()
 	{
-		_spriteRenderer = GetComponent<SpriteRenderer>();
-		_spriteRenderer.enabled = true;
-		_nextStateChange = Time.time + Interval;
-	}
+		var spriteRenderer = GetComponent<SpriteRenderer>();
+		spriteRenderer.enabled = true;
 
-	// Update is called once per frame
-	void Update()
-	{
-		if (Time.time > _nextStateChange)
+		var waitCoroutine = new WaitForSeconds(Interval);
+
+		while (true)
 		{
-			_spriteRenderer.enabled = !_spriteRenderer.enabled;
-			_nextStateChange += Interval;
+			yield return waitCoroutine;
+			spriteRenderer.enabled = !spriteRenderer.enabled;
 		}
 	}
 }

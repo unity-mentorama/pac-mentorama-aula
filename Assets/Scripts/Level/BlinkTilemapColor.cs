@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -9,26 +10,19 @@ public class BlinkTilemapColor : MonoBehaviour
 	public Color Color1;
 	public Color Color2;
 
-	private Tilemap _tilemap;
-
-	private float _nextStateChange;
-	private bool _isColor1;
-
-	private void Start()
+	private IEnumerator Start()
 	{
-		_tilemap = GetComponent<Tilemap>();
-		_tilemap.color = Color1;
-		_isColor1 = true;
-		_nextStateChange = Time.time + Interval;
-	}
+		var tilemap = GetComponent<Tilemap>();
+		tilemap.color = Color1;
+		var isColor1 = true;
 
-	private void Update()
-	{
-		if (Time.time > _nextStateChange)
+		var waitCoroutine = new WaitForSeconds(Interval);
+
+		while (true)
 		{
-			_tilemap.color = _isColor1 ? Color2 : Color1;
-			_isColor1 = !_isColor1;
-			_nextStateChange += Interval;
+			yield return waitCoroutine;
+			tilemap.color = isColor1 ? Color2 : Color1;
+			isColor1 = !isColor1;
 		}
 	}
 }
