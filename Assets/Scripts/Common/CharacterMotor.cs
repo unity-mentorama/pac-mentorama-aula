@@ -28,7 +28,7 @@ public class CharacterMotor : MonoBehaviour
 	public event Action OnAlignedWithGrid;
 	public event Action<Direction> OnDirectionChanged;
 	public event Action OnResetPosition;
-	public event Action OnDisabled;
+	public event Action OnEnabled;
 
 	public LayerMask CollistionLayerMask
 	{
@@ -194,8 +194,8 @@ public class CharacterMotor : MonoBehaviour
 		_rigidbody.MovePosition(_rigidbody.position + _currentMovementDirection * moveDistance);
 	}
 
-	private void OnDisable()
+	private void OnEnable()
 	{
-		OnDisabled?.Invoke();
+		OnEnabled?.Invoke();
 	}
 }

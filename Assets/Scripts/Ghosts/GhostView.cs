@@ -25,7 +25,7 @@ public class GhostView : BaseView
 		GhostAI.OnGhostStateChanged += GhostAI_OnGhostStateChanged;
 	}
 
-	private void GhostAI_OnGhostStateChanged(GhostState ghostState)
+	private void GhostAI_OnGhostStateChanged(GhostAnimationState ghostState)
 	{
 		Animator.SetInteger("State", (int)ghostState);
 	}

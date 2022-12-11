@@ -16,22 +16,25 @@ public class PacmanView : BaseView
 	{
 		CharacterMotor.OnDirectionChanged += CharacterMotor_OnDirectionChanged;
 		CharacterMotor.OnResetPosition += CharacterMotor_OnResetPosition;
-		CharacterMotor.OnDisabled += CharacterMotor_OnDisabled;
+		CharacterMotor.OnEnabled += CharacterMotor_OnEnabled;
 		CharacterLife.OnLifeRemoved += CharacterLife_OnLifeRemoved;
 
 		Animator.SetBool("Moving", false);
 		Animator.SetBool("Dead", false);
 	}
 
-	private void CharacterMotor_OnDisabled()
+	// Usando OnEnable ao invés do OnDisable corrigiu o problema da animação não tocando de forma
+	// bem mais confiável.
+	private void CharacterMotor_OnEnabled()
 	{
-		Animator.speed = 0;
+		Animator.speed = 1;
 	}
 
 	private void CharacterMotor_OnResetPosition()
 	{
 		Animator.SetBool("Moving", false);
 		Animator.SetBool("Dead", false);
+		Animator.speed = 0;
 	}
 
 	private void CharacterLife_OnLifeRemoved(int _)
