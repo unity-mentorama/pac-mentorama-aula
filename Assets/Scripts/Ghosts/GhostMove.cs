@@ -51,9 +51,13 @@ public class GhostMove : MonoBehaviour
 		UpdateFinalDirection(Direction.Down, Vector3.down, ref closestDistance, ref finalDirection);
 		UpdateFinalDirection(Direction.Right, Vector3.right, ref closestDistance, ref finalDirection);
 
+		if (_allowReverseDirection)
+		{
+			finalDirection = GetInverseDirection(finalDirection);
+			_allowReverseDirection = false;
+		}
+		
 		_motor.SetMoveDirection(finalDirection);
-
-		_allowReverseDirection = false;
 	}
 
 	private void UpdateFinalDirection(Direction direction, Vector3 offset, ref float closestDistance, ref Direction finalDirection)
@@ -74,22 +78,32 @@ public class GhostMove : MonoBehaviour
 		switch (direction)
 		{
 			case Direction.Up:
-				return !Physics2D.BoxCast(transform.position, _boxSize, 0, Vector2.up, 1f, _motor.CollistionLayerMask)
-					&& (_motor.CurrentMoveDirection != Direction.Down || _allowReverseDirection);
-
+				return !BoxCast(Vector2.up) && _motor.CurrentMoveDirection != GetInverseDirection(direction);
 			case Direction.Left:
-				return !Physics2D.BoxCast(transform.position, _boxSize, 0, Vector2.left, 1f, _motor.CollistionLayerMask)
-					&& (_motor.CurrentMoveDirection != Direction.Right || _allowReverseDirection);
-
+				return !BoxCast(Vector2.left) && _motor.CurrentMoveDirection != GetInverseDirection(direction);
 			case Direction.Down:
-				return !Physics2D.BoxCast(transform.position, _boxSize, 0, Vector2.down, 1f, _motor.CollistionLayerMask)
-					&& (_motor.CurrentMoveDirection != Direction.Up || _allowReverseDirection);
-
+				return !BoxCast(Vector2.down) && _motor.CurrentMoveDirection != GetInverseDirection(direction);
 			case Direction.Right:
-				return !Physics2D.BoxCast(transform.position, _boxSize, 0, Vector2.right, 1f, _motor.CollistionLayerMask)
-					&& (_motor.CurrentMoveDirection != Direction.Left || _allowReverseDirection);
+				return !BoxCast(Vector2.right) && _motor.CurrentMoveDirection != GetInverseDirection(direction);
 		}
 
 		return false;
+	}
+
+	private bool BoxCast(Vector2 direction)
+	{
+		return Physics2D.BoxCast(transform.position, _boxSize, 0, direction, 1f, _motor.CollistionLayerMask);
+	}
+
+	private Direction GetInverseDirection(Direction direction)
+	{
+		return direction switch
+		{
+			Direction.Up => Direction.Down,
+			Direction.Left => Direction.Right,
+			Direction.Down => Direction.Up,
+			Direction.Right => Direction.Left,
+			_ => direction
+		};
 	}
 }
